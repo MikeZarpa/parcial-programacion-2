@@ -103,7 +103,7 @@
                 $("#myModal .modal-body").html(response);
                 $("#myModal").modal("show");
                 // Resetear el formulario después de mostrar el modal
-                $("#form")[0].reset();
+                $("form")[0].reset();
             }
         });
       });
