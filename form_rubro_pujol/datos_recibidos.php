@@ -31,5 +31,5 @@ if (mysqli_num_rows($result) > 0) {
 
 mysqli_close($scon);
 
-echo "<p><a href='lista_rubro.php'> Ver Lista Rubros </a></p> ";
+//echo "<p><a href='lista_rubro.php'> Ver Lista Rubros </a></p> ";
 ?>

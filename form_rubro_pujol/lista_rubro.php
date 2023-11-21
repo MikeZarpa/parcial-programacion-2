@@ -37,5 +37,5 @@
       ?>
     </tbody>
   </table>
-  <a class="add-button" href="#">Agregar Nuevo Rubro</a>
+  <!-- <a class="add-button" href="#">Agregar Nuevo Rubro</a> -->
 </div>

@@ -4,10 +4,10 @@
     <thead>
       <tr>
         <th>id_producto</th>
-        <th>descripcion</th>
-        <th>precio</th>
-        <th>id_rubro</th>
-        <th>id_marca</th>
+        <th>Descripcion</th>
+        <th>Marca</th>
+        <th>Precio</th>
+        <th>Rubro</th>
       </tr>
     </thead>
     <tbody>
@@ -18,7 +18,7 @@
           die("Connection failed: " . mysqli_connect_error());
       }
 
-      $sql = "SELECT id_producto, descripcion,precio FROM productos";
+      $sql = "SELECT id_producto, productos.descripcion AS nombre, marca.descripcion AS marca, rubro.descripcion AS rubro, precio FROM productos, rubro, marca WHERE marca.id_marca = productos.id_marca AND productos.id_rubro = rubro.id_rubro ORDER BY productos.descripcion";
 
       $result = mysqli_query($scon, $sql);
 
@@ -28,8 +28,10 @@
             
               echo "<tr>";
                 echo "<td>" . $row["id_producto"] . "</td>";
-                echo "<td>" . $row["descripcion"] . "</td>";
+                echo "<td>" . $row["nombre"] . "</td>";
+                echo "<td>" . $row["marca"] . "</td>";
                 echo "<td>" . $row["precio"] . "</td>";
+                echo "<td>" . $row["rubro"] . "</td>";
                 echo '<td class="actions"><a href="#">Editar</a> | <a href="#">Eliminar</a></td>';
               echo "</tr>";
           }
@@ -41,5 +43,5 @@
       ?>
     </tbody>
   </table>
-  <a class="add-button" href="#">Agregar Nuevo Producto</a>
+  <!-- <a class="add-button" href="#">Agregar Nuevo Producto</a> -->
 </div>

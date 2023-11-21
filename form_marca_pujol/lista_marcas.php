@@ -37,5 +37,5 @@
       ?>
     </tbody>
   </table>
-  <a class="add-button" href="#">Agregar Nueva Marca</a>
+  <!-- <a class="add-button" href="#">Agregar Nueva Marca</a> -->
 </div>

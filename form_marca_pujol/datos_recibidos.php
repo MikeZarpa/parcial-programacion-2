@@ -5,7 +5,7 @@ if (!$scon) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-echo "Conexion realizada correctamente";
+//echo "Conexion realizada correctamente";
 
 $descripcion = mysqli_real_escape_string($scon, $_POST["descripcion"]);
 
@@ -31,5 +31,5 @@ if (mysqli_num_rows($result) > 0) {
 
 mysqli_close($scon);
 
-echo "<p><a href='lista_marcas.php'> Ver Lista Marcas </a></p> ";
+//echo "<p><a href='lista_marcas.php'> Ver Lista Marcas </a></p> ";
 ?>
