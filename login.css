@@ -1,0 +1,82 @@
+/* Estilos generales */
+body {
+    font-family: "Helvetica Neue", sans-serif;
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    background: linear-gradient(135deg, #cafcc5, #68d2ff, #fc49f6);
+    background-size: 100% 100%;
+    animation: gradientAnimation 10s infinite;
+}
+
+h1 {
+    color: #444242;
+    margin-bottom: 1em;
+    font-size: 1.4em;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif ;
+}
+
+/* Estilos del formulario */
+#login-form {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    padding: 50px;
+    width: 90%;
+    max-width: 20em;
+    text-align: center;
+    opacity: 0.9;
+    transition: all 0.3s ease; /* Transición para efectos modernos */
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    color: #555;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    color: #333;
+    transition: all 0.3s ease; /* Transición para efectos modernos */
+}
+
+.btn {
+    background-color: #121213;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    opacity: 0.9;
+    transition: background-color 0.3s, transform 0.2s; /* Transición para efectos modernos */
+}
+
+.btn:hover {
+    background-color: #1196f0;
+    transform: scale(1.05); /* Efecto de escala al hacer hover */
+    
+}
+
+/* Media Query para Desktop */
+@media screen and (min-width: 768px) {
+    #login-form {
+        width: 70%; /* Ajustar el ancho para pantallas de escritorio */
+    }
+}

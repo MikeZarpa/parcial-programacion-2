@@ -1,0 +1,24 @@
+  <script>
+    function validarFormulario() {
+
+      var descripcion = document.getElementById("descripcion").value;
+
+      if (descripcion.trim() === "") {
+        alert("Por favor, ingrese la descripcion del rubro.");
+        return false;
+      }
+
+      return true; // El formulario se enviará si todos los campos están completos.
+    }
+  </script>
+  <div class="container">
+    <h2>Formulario de Rubros</h2>
+    <form action="form_rubro_pujol/datos_recibidos.php" method="post" onsubmit="return validarFormulario();">
+      <div class="form-group">
+        <label for="descripcion">Descripción:</label>
+        <input type="text" id="descripcion" name="descripcion" class="form-control">
+      </div>
+     
+      <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
+  </div>

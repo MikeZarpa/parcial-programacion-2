@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión</title>
+    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="footer.css">
+</head>
+<body>
+    <br>
+    <form id="login-form">
+        <h1>Iniciar Sesión</h1><br>
+        <div class="form-group">
+            <label for="email">Correo Electrónico</label>
+            <input type="text" name="email" id="email">
+
+        </div>
+        <div class="form-group">
+            <label for="username">Usuario:</label>
+            <input type="text" id="username" name="username" class="form-control" required>
+        </div>
+
+
+        <div class="form-group">
+            <label for="password">Contrase&ntilde;a:</label>
+            <input type="password" id="password" name="password" class="form-control" >
+        </div>
+
+        <input type="submit" value="Acceder" class="btn btn-primary">
+    </form>
+
+    <br><br>
+    <div id="mensaje">Aquí iría la respuesta del php</div>
+
+
+    <a href="#" onclick="window.location.href = 'home.html';">By pass</a>
+    <footer>
+        <p>Comisión: 3</p>
+        <p>Grupo 3: Rodriguez Daniel - Rodriguez Gonzalo - Salinas Priscila - Schneider Miguel - Villagrán Mario </p>
+    </footer>
+    <!-- Importamos localmente JQuery -->
+    <script src="jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#login-form").submit(function(event) {
+                //Prevenimos que se mande el formulario
+                event.preventDefault();
+                //Obtenemos los datos del formulario
+                const username = $("#username").val();
+                const password = $("#password").val();
+                const email = $("#email").val();
+                //Lo colocamos en una variable
+                var data = {
+                    nombre_usuario:username,
+                    contrasena:password,
+                    email:email,
+                };
+                // Completa el código AJAX para enviar los datos del formulario al servidor y verificar la autenticación
+                $.ajax({
+                    type: "POST",
+                    url: "verificar_login.php", // Crea este archivo
+                    data: data,
+                    success: function(response) {
+                        $("#mensaje").html(response);
+                        if(response=="¡Inicio de sesión exitoso!")
+                            window.location.href = "home.html";
+                    },
+                });
+            });
+        });
+    </script>
+</body>
+</html>

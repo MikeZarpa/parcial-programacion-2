@@ -1,0 +1,28 @@
+/* Footer styles */
+footer {
+    text-align: center;
+    padding: 17px;
+    background-color: #333;
+    color: #fff;
+    width: 80%;
+}
+
+/* Responsive footer styles for screens smaller than 768px */
+@media screen and (max-width: 768px) {
+    footer {
+        padding: 10px;
+    }
+}
+
+/* Additional responsive styles for screens smaller than 480px */
+@media screen and (max-width: 480px) {
+    footer {
+        font-size: 14px;
+    }
+}
+
+
+.h1, .introduccion {
+    font-size: 1.1em;
+    color:rgb(80, 80, 81);
+}
