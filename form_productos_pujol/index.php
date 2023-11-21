@@ -80,3 +80,56 @@
       <button type="submit" class="btn btn-primary">Enviar</button>
     </form>
   </div>
+  <script>
+  $(document).ready(function () {
+    //Seleccionamos algún formulario en pantalla, esperemos que haya solo 1...
+    $("form").submit(function (event) {
+        //Evitamos que salga con su comportamiento por defecto.
+        event.preventDefault();
+
+        //Obtenemos la direccion escrita en el atributo action del formulario.
+        var urlDestino = $("form").attr("action");
+
+        // Obtener los datos del formulario en formato de cadena de consulta
+        var formData = $("form").serialize();
+        
+        // Realizar la solicitud AJAX para verificar la autenticación
+        $.ajax({
+            type: "POST",
+            url: urlDestino,
+            data: formData,
+            success: function (response) {
+                // Inserta la respuesta en un modal para mostrarla
+                $("#myModal .modal-body").html(response);
+                $("#myModal").modal("show");
+                // Resetear el formulario después de mostrar el modal
+                $("#form")[0].reset();
+            }
+        });
+      });
+  });
+</script>
+
+<!-- Agrega el modal al final de tu cuerpo HTML -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+      <div class="modal-content">
+
+          <!-- Cabecera del Modal -->
+          <div class="modal-header">
+              <h4 class="modal-title">Respuesta del Servidor</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+
+          <!-- Cuerpo del Modal -->
+          <div class="modal-body">
+              <!-- El texto de la respuesta se mostrará aquí -->
+          </div>
+
+          <!-- Pie del Modal -->
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          </div>
+      </div>
+    </div>
+</div>
