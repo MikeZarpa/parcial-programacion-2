@@ -18,7 +18,21 @@
           die("Connection failed: " . mysqli_connect_error());
       }
 
-      $sql = "SELECT id_producto, productos.descripcion AS nombre, marca.descripcion AS marca, rubro.descripcion AS rubro, precio FROM productos, rubro, marca WHERE marca.id_marca = productos.id_marca AND productos.id_rubro = rubro.id_rubro ORDER BY productos.descripcion";
+      $sql = "SELECT 
+        productos.id_producto, 
+        productos.descripcion AS nombre, 
+        COALESCE(marca.descripcion, '-') AS marca, 
+        COALESCE(rubro.descripcion, '-') AS rubro, 
+        precio 
+      FROM 
+          productos
+      LEFT JOIN 
+          marca ON marca.id_marca = productos.id_marca
+      LEFT JOIN 
+          rubro ON productos.id_rubro = rubro.id_rubro
+      ORDER BY 
+          productos.descripcion;
+  ";
 
       $result = mysqli_query($scon, $sql);
 

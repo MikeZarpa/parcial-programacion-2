@@ -14,24 +14,27 @@
         alert("Por favor, ingrese el precio del producto.");
         return false;
       }
+      if(id_marca == "null" || id_rubro=="null")
+        return window.confirm("Estas por ingresar un producto sin seleccionar la Marca o el Rubro, ¿deseas continuar?");
 
       return true; // El formulario se enviará si todos los campos están completos.
     }
   </script>
   <div class="container">
     <h2>Formulario de Productos</h2>
-    <form action="form_productos_pujol/datos_recibidos.php" method="post" onsubmit="return validarFormulario();">
+    <form action="form_productos_pujol/datos_recibidos.php" method="post">
       <div class="form-group">
         <label for="descripcion">Descripción:</label>
-        <input type="text" id="descripcion" name="descripcion"  class="form-control">
+        <input type="text" id="descripcion" name="descripcion"  class="form-control" required>
       </div>
       <div class="form-group">
         <label for="precio">Precio:</label>
-        <input type="text" id="precio" name="precio" class="form-control">
+        <input type="text" id="precio" name="precio" class="form-control" required>
       </div>
       <div class="form-group">
         <label for="id_rubro">Rubro:</label>
         <select name="id_rubro" id="id_rubro" class="form-control">
+          <option value="null">Seleccione una opción</option>
           <?php
             $scon = mysqli_connect('localhost', 'root', '', 'pujol_e_hijos_srl');
               
@@ -57,6 +60,7 @@
       <div class="form-group">
         <label for="id_marca">Marca:</label>
         <select name="id_marca" id="id_marca" class="form-control">
+          <option value="null">Seleccione una opción</option>
           <?php
                         
             $sql = "SELECT id_marca, descripcion FROM marca";
@@ -81,55 +85,36 @@
     </form>
   </div>
   <script>
-  $(document).ready(function () {
-    //Seleccionamos algún formulario en pantalla, esperemos que haya solo 1...
-    $("form").submit(function (event) {
-        //Evitamos que salga con su comportamiento por defecto.
-        event.preventDefault();
+    $(document).ready(function () {
+      //Seleccionamos algún formulario en pantalla, esperemos que haya solo 1...
+      $("form").submit(function (event) {
+          //Evitamos que salga con su comportamiento por defecto.
+          event.preventDefault();
 
-        //Obtenemos la direccion escrita en el atributo action del formulario.
-        var urlDestino = $("form").attr("action");
-
-        // Obtener los datos del formulario en formato de cadena de consulta
-        var formData = $("form").serialize();
-        
-        // Realizar la solicitud AJAX para verificar la autenticación
-        $.ajax({
-            type: "POST",
-            url: urlDestino,
-            data: formData,
-            success: function (response) {
-                // Inserta la respuesta en un modal para mostrarla
-                $("#myModal .modal-body").html(response);
-                $("#myModal").modal("show");
-                // Resetear el formulario después de mostrar el modal
-                $("form")[0].reset();
-            }
+          //Validamos el formulario
+          if(!validarFormulario()){
+            return;
+          }
+  
+          //Obtenemos la direccion escrita en el atributo action del formulario.
+          var urlDestino = $("form").attr("action");
+  
+          // Obtener los datos del formulario en formato de cadena de consulta
+          var formData = $("form").serialize();
+          
+          // Realizar la solicitud AJAX para verificar la autenticación
+          $.ajax({
+              type: "POST",
+              url: urlDestino,
+              data: formData,
+              success: function (response) {
+                  // Inserta la respuesta
+                  $("#scripts").html(response);
+                  // Resetear el formulario
+                  $("form")[0].reset();
+              }
+          });
         });
-      });
-  });
-</script>
-
-<!-- Agrega el modal al final de tu cuerpo HTML -->
-<div class="modal" id="myModal">
-  <div class="modal-dialog">
-      <div class="modal-content">
-
-          <!-- Cabecera del Modal -->
-          <div class="modal-header">
-              <h4 class="modal-title">Respuesta del Servidor</h4>
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-          </div>
-
-          <!-- Cuerpo del Modal -->
-          <div class="modal-body">
-              <!-- El texto de la respuesta se mostrará aquí -->
-          </div>
-
-          <!-- Pie del Modal -->
-          <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-          </div>
-      </div>
-    </div>
-</div>
+    });
+  </script>
+  <div id="scripts"></div>
